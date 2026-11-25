@@ -2,7 +2,7 @@
 
 DOMAIN = "izypower_savings"
 NAME = "Izypower Savings"
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 SIGNAL = f"{DOMAIN}_updated"
 DEFAULT_MAX_AGE = 900
 DEFAULT_MAX_GAP = 900

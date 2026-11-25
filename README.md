@@ -10,7 +10,7 @@ Dans Home Assistant, vous choisissez deux capteurs de puissance (en W ou en kW).
 
 [**Izypower Cloud**](https://github.com/StefanPlizga/izypower_cloud) est une source possible pour ces mesures. Si une autre intégration fournit déjà ces puissances dans Home Assistant, vous pouvez aussi sélectionner ses capteurs. Izypower Savings lit les entités que vous choisissez. Aucun accès à Linky ou à votre espace client d’électricité n’est nécessaire.
 
-**Première version publique expérimentale.** Les résultats sont des estimations fondées sur des relevés espacés. Ils servent à suivre un gain dans le temps, pas à reproduire une facture au centime près.
+**Version expérimentale.** Les résultats sont des estimations fondées sur des relevés espacés. Ils servent à suivre un gain dans le temps, pas à reproduire une facture au centime près.
 
 ![Graphique des économies par jour](images/graph-jours.png)
 
