@@ -2,13 +2,17 @@
 
 <img src="custom_components/izypower_savings/brand/icon.png" alt="Icône Izypower Savings" width="80" height="80">
 
-Estimer les économies de son installation solaire dans Home Assistant, avec des **barres par jour, par mois et par année**.
+**Pour estimer vos économies, il faut savoir ce que vos appareils consomment et ce que vous achetez au réseau au même instant.** Multiplier la production totale affichée dans l’app Izypower par votre tarif d’achat revient à supposer que chaque kWh produit a remplacé un achat au même prix.
 
-Dans Home Assistant, vous choisissez deux mesures de puissance, en W ou en kW. La première indique ce que consomment vos appareils, y compris lorsqu’ils sont alimentés par le solaire ou la batterie. La seconde indique ce que vous achetez au réseau et, si le capteur le mesure, ce que vous y injectez.
+Par exemple, vos panneaux produisent 3 kWh en une heure. Vos appareils en utilisent 1 et vous injectez gratuitement les 2 autres sur le réseau. Vous avez donc évité d’acheter **1 kWh**. Si cette heure est facturée à 0,25 €/kWh, vous économisez **0,25 €**. Avec la même production et la même consommation pendant une heure creuse à 0,15 €/kWh, vous économisez **0,15 €**.
 
-**Izypower Cloud** est une source possible pour ces mesures. Si une autre intégration fournit déjà ces puissances dans Home Assistant, vous pouvez aussi sélectionner ses capteurs. Izypower Savings lit les entités que vous choisissez. Aucun accès à Linky ou à votre espace client d’électricité n’est nécessaire.
+Dans Home Assistant, vous choisissez deux capteurs de puissance (en W ou en kW). L’un mesure la consommation de vos appareils, l’autre les échanges avec le réseau. Izypower Savings utilise leurs **relevés horodatés** pour estimer les kWh consommés et achetés entre deux mesures et appliquer le tarif en vigueur sur chaque plage horaire. Si vous revendez le surplus, les revenus de la vente s’ajoutent aux économies. Le graphique affiche le gain par jour, par mois ou par année.
+
+[**Izypower Cloud**](https://github.com/StefanPlizga/izypower_cloud) est une source possible pour ces mesures. Si une autre intégration fournit déjà ces puissances dans Home Assistant, vous pouvez aussi sélectionner ses capteurs. Izypower Savings lit les entités que vous choisissez. Aucun accès à Linky ou à votre espace client d’électricité n’est nécessaire.
 
 **Première version publique expérimentale.** Les résultats sont des estimations fondées sur des relevés espacés. Ils servent à suivre un gain dans le temps, pas à reproduire une facture au centime près.
+
+![Graphique des économies par jour](images/graph-jours.png)
 
 ## Fonctionnalités
 
