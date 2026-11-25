@@ -17,7 +17,7 @@ views:
       stat_types:
       - change
       entities:
-      - entity: isipower_savings:benefit
+      - entity: izypower_savings:benefit
         name: Économies + revenus d’injection
       grid_options:
         columns: full
@@ -29,7 +29,7 @@ views:
       grid_options:
         columns: full
         rows: auto
-      content: '{% set e = ''sensor.isipower_savings_jour'' %}
+      content: '{% set e = ''sensor.izypower_savings_jour'' %}
 
         {% set gain = states(e) %}
 
@@ -84,7 +84,7 @@ views:
       stat_types:
       - change
       entities:
-      - entity: isipower_savings:benefit
+      - entity: izypower_savings:benefit
         name: Économies + revenus d’injection
       grid_options:
         columns: full
@@ -96,7 +96,7 @@ views:
       grid_options:
         columns: full
         rows: auto
-      content: '{% set e = ''sensor.isipower_savings_mois'' %}
+      content: '{% set e = ''sensor.izypower_savings_mois'' %}
 
         {% set gain = states(e) %}
 
@@ -151,7 +151,7 @@ views:
       stat_types:
       - change
       entities:
-      - entity: isipower_savings:benefit
+      - entity: izypower_savings:benefit
         name: Économies + revenus d’injection
       grid_options:
         columns: full
@@ -163,7 +163,7 @@ views:
       grid_options:
         columns: full
         rows: auto
-      content: '{% set e = ''sensor.isipower_savings_annee'' %}
+      content: '{% set e = ''sensor.izypower_savings_annee'' %}
 
         {% set gain = states(e) %}
 

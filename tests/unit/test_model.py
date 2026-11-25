@@ -8,7 +8,7 @@ import unittest
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location("savings_model", ROOT / "custom_components/isipower_savings/model.py")
+spec = importlib.util.spec_from_file_location("savings_model", ROOT / "custom_components/izypower_savings/model.py")
 m = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(m)
 TZ = ZoneInfo("Europe/Paris")

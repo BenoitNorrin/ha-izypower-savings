@@ -13,9 +13,9 @@ from homeassistant.components.recorder.statistics import async_add_external_stat
 from homeassistant.helpers import frame
 from pytest_homeassistant.common import MockConfigEntry, async_test_home_assistant
 
-from custom_components.isipower_savings.config import normalize
-from custom_components.isipower_savings.const import DOMAIN, ENTRY_MINOR_VERSION
-from custom_components.isipower_savings.coordinator import SavingsCoordinator
+from custom_components.izypower_savings.config import normalize
+from custom_components.izypower_savings.const import DOMAIN, ENTRY_MINOR_VERSION
+from custom_components.izypower_savings.coordinator import SavingsCoordinator
 
 
 @pytest.mark.parametrize("zone,upgrade", [("Europe/Paris", False), ("Asia/Kolkata", True)])

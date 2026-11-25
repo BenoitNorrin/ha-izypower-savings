@@ -3,8 +3,8 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import patch
 from types import SimpleNamespace
 
-from custom_components.isipower_savings.config import normalize
-from custom_components.isipower_savings.coordinator import SavingsCoordinator
+from custom_components.izypower_savings.config import normalize
+from custom_components.izypower_savings.coordinator import SavingsCoordinator
 
 
 def config(**extra):
@@ -25,7 +25,7 @@ async def test_partial_day_and_recorded_prices(hass, freezer):
     c = SavingsCoordinator(hass, cfg)
     c.now = lambda: now
     writes = []
-    with patch("custom_components.isipower_savings.coordinator.async_add_external_statistics",
+    with patch("custom_components.izypower_savings.coordinator.async_add_external_statistics",
                side_effect=lambda *args: writes.append(args)):
         await c.async_load()
         states(hass, now)
@@ -37,8 +37,8 @@ async def test_partial_day_and_recorded_prices(hass, freezer):
         assert result["benefit"] > 0
         assert result["measured_hours"] == .08
         assert {item[1]["statistic_id"] for item in writes} == {
-            "isipower_savings:benefit", "isipower_savings:savings", "isipower_savings:revenue",
-            "isipower_savings:with_installation", "isipower_savings:without_installation"}
+            "izypower_savings:benefit", "izypower_savings:savings", "izypower_savings:revenue",
+            "izypower_savings:with_installation", "izypower_savings:without_installation"}
         other = SavingsCoordinator(hass, cfg)
         other.now = lambda: now
         await other.async_load()
@@ -90,7 +90,7 @@ async def test_station_clock_does_not_refresh_independent_charger(hass):
     entries = dict.fromkeys(["sensor.home_power", "sensor.grid_power", "sensor.report_at"], station)
     entries["sensor.charger"] = charger
     registry = SimpleNamespace(async_get=entries.get)
-    with patch("custom_components.isipower_savings.coordinator.er.async_get", return_value=registry):
+    with patch("custom_components.izypower_savings.coordinator.er.async_get", return_value=registry):
         assert c.reading(now)["error"] == "source_stale"
         # A fresh 0 W from the independent charger is a valid observation.
         hass.states.async_set_internal("sensor.charger", "0", {"unit_of_measurement": "W"},
@@ -103,7 +103,7 @@ async def test_delayed_reports_resume_after_an_error_across_restart(hass):
     now = start
     c = SavingsCoordinator(hass, config())
     c.now = lambda: now
-    with patch("custom_components.isipower_savings.coordinator.async_add_external_statistics"):
+    with patch("custom_components.izypower_savings.coordinator.async_add_external_statistics"):
         await c.async_load()
         states(hass, start)
         await c.async_capture()

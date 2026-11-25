@@ -1,12 +1,12 @@
-# Isipower Savings
+# Izypower Savings
 
-<img src="custom_components/isipower_savings/brand/icon.png" alt="Icône Isipower Savings" width="80" height="80">
+<img src="custom_components/izypower_savings/brand/icon.png" alt="Icône Izypower Savings" width="80" height="80">
 
 Estimer les économies de son installation solaire dans Home Assistant, avec des **barres par jour, par mois et par année**.
 
 Dans Home Assistant, vous choisissez deux mesures de puissance, en W ou en kW. La première indique ce que consomment vos appareils, y compris lorsqu’ils sont alimentés par le solaire ou la batterie. La seconde indique ce que vous achetez au réseau et, si le capteur le mesure, ce que vous y injectez.
 
-**Isypower Cloud** est une source possible pour ces mesures. Si une autre intégration fournit déjà ces puissances dans Home Assistant, vous pouvez aussi sélectionner ses capteurs. Isipower Savings lit les entités que vous choisissez. Aucun accès à Linky ou à votre espace client d’électricité n’est nécessaire.
+**Izypower Cloud** est une source possible pour ces mesures. Si une autre intégration fournit déjà ces puissances dans Home Assistant, vous pouvez aussi sélectionner ses capteurs. Izypower Savings lit les entités que vous choisissez. Aucun accès à Linky ou à votre espace client d’électricité n’est nécessaire.
 
 **Première version publique expérimentale.** Les résultats sont des estimations fondées sur des relevés espacés. Ils servent à suivre un gain dans le temps, pas à reproduire une facture au centime près.
 
@@ -76,20 +76,30 @@ Si le capteur signé utilise la convention opposée, l’option avancée **Inver
 
 ### Avec HACS, comme dépôt personnalisé
 
-1. Ajouter `https://github.com/BenoitNorrin/ha-isipower-savings` aux dépôts personnalisés HACS, catégorie **Intégration**.
-2. Télécharger **Isipower Savings**.
+1. Ajouter `https://github.com/BenoitNorrin/ha-izypower-savings` aux dépôts personnalisés HACS, catégorie **Intégration**.
+2. Télécharger **Izypower Savings**.
 3. Redémarrer Home Assistant.
-4. Dans **Paramètres → Appareils et services → Ajouter une intégration**, chercher **Isipower Savings**.
+4. Dans **Paramètres → Appareils et services → Ajouter une intégration**, chercher **Izypower Savings**.
 
 Le dépôt est prévu pour l’installation comme dépôt personnalisé ; il n’est pas annoncé comme inclus dans le catalogue officiel HACS.
 
 ### Installation manuelle
 
-1. Copier `custom_components/isipower_savings` dans `/config/custom_components/isipower_savings`.
+1. Copier `custom_components/izypower_savings` dans `/config/custom_components/izypower_savings`.
 2. Redémarrer Home Assistant.
-3. Ajouter **Isipower Savings** dans Appareils et services.
+3. Ajouter **Izypower Savings** dans Appareils et services.
 
 La configuration se fait ensuite dans l’interface. Aucun package YAML, assistant de prix ou script externe n’est nécessaire.
+
+### Mise à jour depuis la version 0.1.0
+
+Le domaine Home Assistant passe de `isipower_savings` à `izypower_savings`. Pour conserver vos mesures et retrouver vos graphiques sous le nouveau nom, effectuez ces étapes avant de configurer la nouvelle intégration.
+
+1. Sauvegarder Home Assistant et relever les capteurs, les tarifs et les options de l’ancienne intégration.
+2. Retirer l’ancienne entrée dans **Paramètres → Appareils et services**. Les journaux restent dans `/config/isipower_savings/`.
+3. Copier ce dossier sous le nom `/config/izypower_savings/` avant le premier démarrage du nouveau suivi. Si les deux dossiers contiennent déjà des relevés, conserver les deux historiques séparément pour éviter tout écrasement.
+4. Installer **Izypower Savings** selon l’une des méthodes ci-dessus et reprendre les mêmes réglages, avec la même devise et le même fuseau horaire. L’intégration relit les journaux et recalcule les statistiques.
+5. Dans les tableaux de bord et les automatisations existants, remplacer le préfixe `sensor.isipower_savings_` par `sensor.izypower_savings_` et `isipower_savings:` par `izypower_savings:`. Pour les entités renommées à la main, vérifier leur identifiant dans Home Assistant.
 
 ## Configuration
 
@@ -99,7 +109,7 @@ Choisir la consommation principale et le réseau. Tous les autres capteurs sont 
 
 Les textes d’aide affichent des exemples **indicatifs**, sans sélectionner d’entité à votre place :
 
-| Champ | Exemple possible avec Isypower |
+| Champ | Exemple possible avec Izypower |
 | --- | --- |
 | Consommation principale | `sensor.izypower_cloud_<centrale>_consommation` |
 | Réseau | `sensor.izypower_cloud_<centrale>_puissance_reseau` |
@@ -148,20 +158,20 @@ Les statistiques disponibles sont :
 
 | Identifiant | Contenu |
 | --- | --- |
-| `isipower_savings:benefit` | Gain total : économies + revenus d’injection. |
-| `isipower_savings:savings` | Économies sur la consommation seulement. |
-| `isipower_savings:revenue` | Revenus d’injection seulement. |
-| `isipower_savings:with_installation` | Achats moins revenus d’injection. |
-| `isipower_savings:without_installation` | Coût estimé des usages sans installation. |
+| `izypower_savings:benefit` | Gain total : économies + revenus d’injection. |
+| `izypower_savings:savings` | Économies sur la consommation seulement. |
+| `izypower_savings:revenue` | Revenus d’injection seulement. |
+| `izypower_savings:with_installation` | Achats moins revenus d’injection. |
+| `izypower_savings:without_installation` | Coût estimé des usages sans installation. |
 
-Les capteurs `sensor.isipower_savings_jour`, `_mois` et `_annee` exposent le gain de la période en cours, avec le détail des coûts et des heures mesurées dans leurs attributs. Les identifiants peuvent varier si vous les renommez dans Home Assistant.
+Les capteurs `sensor.izypower_savings_jour`, `_mois` et `_annee` exposent le gain de la période en cours, avec le détail des coûts et des heures mesurées dans leurs attributs. Les identifiants peuvent varier si vous les renommez dans Home Assistant.
 
 ## Historique et évolution des tarifs
 
 Les fichiers sont conservés dans :
 
 ```text
-/config/isipower_savings/history-AAAA-MM.jsonl
+/config/izypower_savings/history-AAAA-MM.jsonl
 ```
 
 Chaque ligne décrit un début de suivi, une mesure normalisée, un changement de sources ou un **changement de tarif horodaté**. Les prix, plages et conditions de revente sont enregistrés intégralement.
@@ -184,9 +194,9 @@ Après une interruption, le premier nouveau relevé valide sert de point de dép
 
 ## Passage depuis la version privée « économies solaires 2.0 »
 
-Retirer l’ancien package `cout_solaire.yaml` avant d’activer cette intégration publique. Les intégrations portent des domaines différents : `economies_solaires` pour la version privée, `isipower_savings` pour celle-ci.
+Retirer l’ancien package `cout_solaire.yaml` avant d’activer cette intégration publique. Les intégrations portent des domaines différents : `economies_solaires` pour la version privée, `izypower_savings` pour celle-ci.
 
-Le nouveau suivi démarre à son activation. Les anciens journaux restent conservés et ne sont pas importés automatiquement. L’intégration Isypower Cloud qui fournit les puissances reste nécessaire si elle est votre source.
+Le nouveau suivi démarre à son activation. Les anciens journaux restent conservés et ne sont pas importés automatiquement. L’intégration Izypower Cloud qui fournit les puissances reste nécessaire si elle est votre source.
 
 ## Tests et contributions
 
@@ -198,7 +208,7 @@ La CI GitHub Actions s’exécute sur chaque push et pull request :
 - vérification des fichiers JSON, de la syntaxe et du style ;
 - validation de l’intégration et de sa structure HACS.
 
-Les tests n’ont besoin d’aucun compte Isypower, Linky ou fournisseur. Ils utilisent des entités et des données fictives. Les journaux de tests restent temporaires.
+Les tests n’ont besoin d’aucun compte Izypower, Linky ou fournisseur. Ils utilisent des entités et des données fictives. Les journaux de tests restent temporaires.
 
 Les tests du moteur peuvent également être lancés sans installer Home Assistant :
 
@@ -214,4 +224,4 @@ Les signalements et contributions sont bienvenus. Merci de retirer les données 
 
 Copyright © 2026 BenoitNorrin. Projet distribué sous **GPL-3.0-only** ; voir [`LICENSE`](LICENSE).
 
-Projet communautaire indépendant, sans affiliation officielle avec Isypower.
+Projet communautaire indépendant, sans affiliation officielle avec Izypower.

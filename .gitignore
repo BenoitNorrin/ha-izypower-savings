@@ -13,5 +13,7 @@ htmlcov/
 secrets.yaml
 configuration.yaml
 home-assistant*.db*
-isipower_savings/
-!custom_components/isipower_savings/
+/isipower_savings/
+izypower_savings/
+!custom_components/izypower_savings/
+/.idea/

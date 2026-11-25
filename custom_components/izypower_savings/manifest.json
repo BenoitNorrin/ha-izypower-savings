@@ -1,13 +1,13 @@
 {
-  "domain": "isipower_savings",
-  "name": "Isipower Savings",
+  "domain": "izypower_savings",
+  "name": "Izypower Savings",
   "codeowners": ["@BenoitNorrin"],
   "config_flow": true,
   "dependencies": ["recorder"],
-  "documentation": "https://github.com/BenoitNorrin/ha-isipower-savings",
+  "documentation": "https://github.com/BenoitNorrin/ha-izypower-savings",
   "integration_type": "helper",
   "iot_class": "calculated",
-  "issue_tracker": "https://github.com/BenoitNorrin/ha-isipower-savings/issues",
+  "issue_tracker": "https://github.com/BenoitNorrin/ha-izypower-savings/issues",
   "requirements": [],
   "single_config_entry": true,
   "version": "0.1.0"

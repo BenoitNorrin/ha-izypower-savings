@@ -1,4 +1,4 @@
-"""Config-entry lifecycle for Isipower Savings."""
+"""Config-entry lifecycle for Izypower Savings."""
 from homeassistant.const import Platform
 from homeassistant.core import callback
 from homeassistant.exceptions import ConfigEntryNotReady

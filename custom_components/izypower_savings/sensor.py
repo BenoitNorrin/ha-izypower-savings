@@ -2,7 +2,7 @@
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
 
-from .const import DOMAIN, SIGNAL, PERIODS
+from .const import DOMAIN, NAME, SIGNAL, PERIODS
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -27,7 +27,7 @@ class SavingsSensor(SensorEntity):
         else:
             self._attr_device_class = SensorDeviceClass.ENUM
             self._attr_options = ["waiting", "collecting", "source_error"]
-        self._attr_device_info = {"identifiers": {(DOMAIN, "household")}, "name": "Isipower Savings",
+        self._attr_device_info = {"identifiers": {(DOMAIN, "household")}, "name": NAME,
                                   "manufacturer": "Communauté", "model": "Estimation locale"}
 
     async def async_added_to_hass(self):

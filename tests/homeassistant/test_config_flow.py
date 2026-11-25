@@ -6,8 +6,8 @@ from homeassistant.config_entries import SOURCE_USER
 from homeassistant.data_entry_flow import FlowResultType
 from pytest_homeassistant.common import MockConfigEntry
 
-from custom_components.isipower_savings.config import normalize
-from custom_components.isipower_savings.const import DOMAIN
+from custom_components.izypower_savings.config import normalize
+from custom_components.izypower_savings.const import DOMAIN
 
 SOURCES = {"consumption_sensor": "sensor.home_power", "grid_sensor": "sensor.grid_power", "currency": "EUR"}
 FLAT = {"base_rate": .25, "off_peak_enabled": False, "super_off_peak_enabled": False}
@@ -22,7 +22,7 @@ async def start_flow(hass):
 
 @pytest.mark.parametrize("mode", ["none", "unpaid", "paid"])
 async def test_complete_flow_without_ev_charger(hass, mode):
-    with patch("custom_components.isipower_savings.async_setup_entry", new=AsyncMock(return_value=True)):
+    with patch("custom_components.izypower_savings.async_setup_entry", new=AsyncMock(return_value=True)):
         result = await start_flow(hass)
         result = await hass.config_entries.flow.async_configure(result["flow_id"], SOURCES)
         assert result["step_id"] == "tariffs"
@@ -76,7 +76,7 @@ async def test_invalid_report_clock_is_flagged_in_options(hass):
 
 
 async def test_super_off_peak_can_be_configured(hass):
-    with patch("custom_components.isipower_savings.async_setup_entry", new=AsyncMock(return_value=True)):
+    with patch("custom_components.izypower_savings.async_setup_entry", new=AsyncMock(return_value=True)):
         result = await start_flow(hass)
         result = await hass.config_entries.flow.async_configure(result["flow_id"], SOURCES)
         result = await hass.config_entries.flow.async_configure(result["flow_id"], {
@@ -111,7 +111,7 @@ async def test_options_can_remove_optional_sensors(hass):
 
 
 async def test_extra_load_can_be_a_workshop_instead_of_a_charger(hass):
-    with patch("custom_components.isipower_savings.async_setup_entry", new=AsyncMock(return_value=True)):
+    with patch("custom_components.izypower_savings.async_setup_entry", new=AsyncMock(return_value=True)):
         result = await start_flow(hass)
         result = await hass.config_entries.flow.async_configure(result["flow_id"], {
             **SOURCES, "additional_consumption": ["sensor.workshop_power"]})
